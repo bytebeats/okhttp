@@ -4,6 +4,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
 import android.widget.TextView
+import me.bytebeats.okhttp.HttpsUtils
 import me.bytebeats.okhttp.OkHttpUtil
 import okhttp3.OkHttpClient
 import okhttp3.Request
@@ -18,6 +19,15 @@ class MainActivity : AppCompatActivity() {
                 val builder = OkHttpClient.Builder()
                 // 12306 不再使用自签名证书, 而是使用了Digicert
 //                OkHttpUtil.supportSelfSignedCertificates(builder, applicationContext.assets.open("srca.cer"))
+//                HttpsUtils.initSslSocketFactory(application)
+//                HttpsUtils.sSLSocketFactory?.let { sslSocketFactory ->
+//                    HttpsUtils.trustManager?.let { trustManager ->
+//                        builder.sslSocketFactory(
+//                            sslSocketFactory,
+//                            trustManager
+//                        )
+//                    }
+//                }
                 val client = builder.build()
                 val request = Request.Builder().url("https://kyfw.12306.cn/otn/").build()
                 val response = client.newCall(request).execute()
