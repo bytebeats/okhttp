@@ -1,4 +1,4 @@
-package me.bytebeats.okhttp
+package me.bytebeats.okhttp.progress
 
 /**
  * @Author bytebeats
