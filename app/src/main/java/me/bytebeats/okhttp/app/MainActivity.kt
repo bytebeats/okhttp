@@ -6,8 +6,14 @@ import android.util.Log
 import android.widget.TextView
 import me.bytebeats.okhttp.HttpsUtils
 import me.bytebeats.okhttp.OkHttpUtil
+import me.bytebeats.okhttp.progress.DownloadInterceptor
+import me.bytebeats.okhttp.progress.DownloadListener
+import me.bytebeats.okhttp.progress.ProgressListener
+import me.bytebeats.okhttp.progress.UploadListener
+import me.bytebeats.okhttp.progress.UploadRequestBody.Companion.multipartBody
 import okhttp3.OkHttpClient
 import okhttp3.Request
+import java.io.File
 import kotlin.concurrent.thread
 
 class MainActivity : AppCompatActivity() {
@@ -34,6 +40,41 @@ class MainActivity : AppCompatActivity() {
                 Log.e(TAG, response.body?.string() ?: "null body")
             }
         }
+    }
+
+    private fun download() {
+        val downloadClient = OkHttpClient.Builder().addInterceptor(DownloadInterceptor(object : DownloadListener {
+            override fun onStarted() {
+                TODO("Not yet implemented")
+            }
+
+            override fun onFinished() {
+                TODO("Not yet implemented")
+            }
+        }, object : ProgressListener {
+            override fun onProgress(currentLength: Long, totalLength: Long) {
+
+            }
+        }))
+        //continue...
+    }
+
+    private fun upload() {
+        val file = File(this.filesDir, "xxx.zip")
+        val uploadRequestBody = multipartBody(file, object : UploadListener {
+            override fun onStarted() {
+                TODO("Not yet implemented")
+            }
+
+            override fun onFinished() {
+                TODO("Not yet implemented")
+            }
+        }, object : ProgressListener {
+            override fun onProgress(currentLength: Long, totalLength: Long) {
+                TODO("Not yet implemented")
+            }
+        })
+        Request.Builder().url("your url")
     }
 
     companion object {
