@@ -1,14 +1,14 @@
 package me.bytebeats.okhttp
 
 import android.app.Application
-import java.io.InputStream
 import java.security.KeyStore
-import me.bytebeats.okhttp.HttpsUtils
 import java.io.IOException
 import java.security.NoSuchAlgorithmException
 import java.lang.Exception
 import java.security.cert.CertificateException
 import java.security.cert.CertificateFactory
+import java.security.cert.Extension
+import java.security.cert.X509Certificate
 import javax.net.ssl.*
 
 /**
@@ -167,4 +167,13 @@ object HttpsUtils {
         }
         return null
     }
+
+    /**
+     * 当服务器不下发中间证书, 但中间需要认证时, 需要客户端自行下载中间证书并进行认证
+     * 需要 bouncecastle 依赖才可以进行
+     */
+//    fun downloadAndCheckMiddleCA(chain: Array<X509Certificate>, authType: String): Boolean {
+//        val extValue = chain[0].getExtensionValue(Extension.authorityIfoAccess.getId())
+//        val aia = AuthorityInformationAccess.getInstance(X509ExtensionUti.)
+//    }
 }
